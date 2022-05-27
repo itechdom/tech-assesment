@@ -46,5 +46,9 @@ namespace justice_technical_assestment.Infrastructure.Services
                 throw new CustomException(MessageCodes.FEAccessForbidden, technicalMessage: $"access_token error: invalid claim \'{type}\'.");
             }
         }
+
+        public string authenticate(string username, string password){
+            return "token here ...";       
+        }
     }
 }

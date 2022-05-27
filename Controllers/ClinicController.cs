@@ -23,6 +23,11 @@ namespace justice_technical_assestment.Controllers
             this._IdentityService = identityService;
         }
         [HttpGet]
+        [Route("")]
+        public async Task<ResponseResult<List<Patient>>> GetPatientsTwo(int? patientId) =>
+            await _ClinicService.GetPatients(patientId);
+
+        [HttpGet]
         [Route("patient")]
         public async Task<ResponseResult<List<Patient>>> GetPatients(int? patientId) =>
             await _ClinicService.GetPatients(patientId);

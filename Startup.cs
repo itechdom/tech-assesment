@@ -82,7 +82,6 @@ namespace justice_technical_assestment
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSwagger();
 
             // global cors policy
             app.UseCors(x => x
@@ -90,17 +89,6 @@ namespace justice_technical_assestment
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials()); // allow credentials
-
-            app.UseSwaggerUI(options =>
-            {
-                if (env.IsDevelopment())
-                {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                    //options.RoutePrefix = string.Empty;
-                }
-                else
-                    options.SwaggerEndpoint("v1/swagger.json", "My API V1");
-            });
         }
     }
 }

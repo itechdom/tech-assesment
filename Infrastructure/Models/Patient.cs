@@ -7,7 +7,8 @@ namespace justice_technical_assestment.Infrastructure.Models
 {
     public class Patient
     {
-        public int id;
+        public int PatientID;
+        public int UserID;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return string.Join(" ", new[] { FirstName, LastName }); } }
@@ -17,7 +18,6 @@ namespace justice_technical_assestment.Infrastructure.Models
 
     public class PatientRequestDto
     {
-        public int id;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return string.Join(" ", new[] { FirstName, LastName }); } }
@@ -27,7 +27,6 @@ namespace justice_technical_assestment.Infrastructure.Models
 
     public class PatientResponseDto
     {
-        public int id;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return string.Join(" ", new[] { FirstName, LastName }); } }

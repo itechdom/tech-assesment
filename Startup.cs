@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft;
 using Newtonsoft.Json.Serialization;
+using justice_technical_assestment.Infrastructure.Services;
 
 namespace justice_technical_assestment
 {
@@ -44,7 +45,7 @@ namespace justice_technical_assestment
             });
 
             services.AddHttpContextAccessor();
-            services.AddControllersWithViews()
+            services.AddControllers()
                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
@@ -65,7 +66,8 @@ namespace justice_technical_assestment
 
         public void AddApplicationServices(IServiceCollection services)
         {
-            // services.AddTransient<SearchItemsByPhoneProxy>();
+            services.AddTransient<ClinicService>();
+            services.AddTransient<IdentityService>();
 
             //
         }
@@ -76,12 +78,13 @@ namespace justice_technical_assestment
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             // global cors policy
             app.UseCors(x => x

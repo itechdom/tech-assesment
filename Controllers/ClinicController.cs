@@ -8,8 +8,8 @@ using justice_technical_assestment.Infrastructure.Services;
 namespace justice_technical_assestment.Controllers
 {
     [ApiController]
-    [Route("")]
-    [Authorize]
+    [Route("[controller]")]
+    [AllowAnonymous]
     public class ClinicController : ControllerBase
     {
         private readonly IdentityService _IdentityService;
@@ -24,28 +24,23 @@ namespace justice_technical_assestment.Controllers
         }
         [HttpGet]
         [Route("")]
-        public async Task<ResponseResult<List<Patient>>> GetPatientsTwo(int? patientId) =>
-            await _ClinicService.GetPatients(patientId);
-
-        [HttpGet]
-        [Route("patient")]
         public async Task<ResponseResult<List<Patient>>> GetPatients(int? patientId) =>
             await _ClinicService.GetPatients(patientId);
 
         [HttpPost]
-        [Route("patient")]
+        [Route("")]
         public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto model) =>
            await _ClinicService.CreatePatient(model);
 
         [HttpPut]
-        [Route("patient")]
+        [Route("")]
         public async Task<ResponseResult<Patient>> UpdatePatient(PatientRequestDto model) =>
            await _ClinicService.UpdatePatient(model);
 
         [HttpDelete]
-        [Route("patient")]
+        [Route("")]
         public async Task<ResponseResult<List<Patient>>> DeletePatient(int patientId) =>
             await _ClinicService.DeletePatient(patientId);
 
-   }
+    }
 }

@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft;
 using Newtonsoft.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 using justice_technical_assestment.Infrastructure.Services;
+using justice_technical_assestment.Infrastructure.Data;
 
 namespace justice_technical_assestment
 {
@@ -37,6 +39,11 @@ namespace justice_technical_assestment
             //         policy.RequireClaim("scope", Configuration["AppSettings:required_scopes"]);
             //     });
             // });
+
+            services.AddDbContext<ClinicContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            // services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {

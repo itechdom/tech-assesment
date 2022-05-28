@@ -18,10 +18,28 @@ namespace justice_technical_assestment.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Patient> Patients { get; set; }
 
+        public DbSet<Doctor> Doctors { get; set; }
+
+        public DbSet<Kin> Kins { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User").HasKey(p => p.Id);
-            modelBuilder.Entity<Patient>().ToTable("Patient").HasKey(p => p.Id);
+            modelBuilder.Entity<Doctor>().ToTable("Doctor").HasKey(p => p.Id);
+            modelBuilder.Entity<Kin>().ToTable("Kin").HasKey(p => p.Id);
+            modelBuilder.Entity<Patient>().HasKey(p => p.Id);
+            modelBuilder.Entity<Patient>().ToTable("Patient").HasData(
+                new Patient
+                {
+                    Id = 1,
+                    FirstName = "Osama",
+                    LastName = "Alghanmi",
+                    DateOfBirth = new DateTime(1989, 11, 11),
+                    Gender = GenderCode.M,
+                    MobileNumber = "0501977200",
+                    PassNo = "XYZ190222"
+                }
+            );
         }
     }
 }

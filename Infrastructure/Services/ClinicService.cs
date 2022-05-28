@@ -1,5 +1,6 @@
 ﻿using justice_technical_assestment.Infrastructure.Models;
 using justice_technical_assestment.Models;
+using justice_technical_assestment.Infrastructure.Repositories;
 
 
 namespace justice_technical_assestment.Infrastructure.Services
@@ -8,6 +9,7 @@ namespace justice_technical_assestment.Infrastructure.Services
     {
         private readonly IHttpContextAccessor _context;
         public IdentityService _IdentityService { get; }
+        public PatientRepository _PatientRepository { get; set; }
         public string _AppBaseUrl => $"{_context.HttpContext.Request.Scheme}://{_context.HttpContext.Request.Host}{_context.HttpContext.Request.PathBase}";
 
         public string _headerLanguage => _context.HttpContext.Request.Headers["accept-language"].ToString() ?? "ar";
@@ -16,11 +18,13 @@ namespace justice_technical_assestment.Infrastructure.Services
 
         public ClinicService(
             IdentityService identityService,
+            PatientRepository patientRepository,
             IHttpContextAccessor context,
             IConfiguration configuration
             )
         {
             _IdentityService = identityService;
+            _PatientRepository = patientRepository;
             _context = context;
             _Configuration = configuration;
         }
@@ -31,7 +35,10 @@ namespace justice_technical_assestment.Infrastructure.Services
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
-            return new ResponseResult<List<Patient>>(){};
+            var dbPatients = await _PatientRepository.Get(0, 10);
+            var response = new ResponseResult<List<Patient>>();
+            response.ResponseData = dbPatients;
+            return response;
         }
         public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto patient)
         {
@@ -39,7 +46,7 @@ namespace justice_technical_assestment.Infrastructure.Services
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
-            return new ResponseResult<Patient>(){};
+            return new ResponseResult<Patient>() { };
         }
 
         public async Task<ResponseResult<Patient>> UpdatePatient(PatientRequestDto patient)
@@ -48,7 +55,7 @@ namespace justice_technical_assestment.Infrastructure.Services
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
-            return new ResponseResult<Patient>(){};
+            return new ResponseResult<Patient>() { };
         }
         public async Task<ResponseResult<List<Patient>>> DeletePatient(int patientId)
         {
@@ -56,10 +63,11 @@ namespace justice_technical_assestment.Infrastructure.Services
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
-            return new ResponseResult<List<Patient>>(){};
+            return new ResponseResult<List<Patient>>() { };
         }
 
-        internal async Task<bool> isValidPatient(int patientId){
+        internal async Task<bool> isValidPatient(int patientId)
+        {
             //takes the id of the doctor and returns whether this patient belongs to him
             return true;
         }

@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using justice_technical_assestment.Infrastructure.Services;
 using justice_technical_assestment.Infrastructure.Data;
+using justice_technical_assestment.Infrastructure.Repositories;
 
 namespace justice_technical_assestment
 {
@@ -75,6 +76,7 @@ namespace justice_technical_assestment
         {
             services.AddTransient<ClinicService>();
             services.AddTransient<IdentityService>();
+            services.AddTransient<PatientRepository>();
 
             //
         }

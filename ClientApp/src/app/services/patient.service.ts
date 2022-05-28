@@ -11,7 +11,6 @@ export class PatientService {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
     this.http = http;
-    this.getPatients();
   }
   getPatients(): Promise<Patient[]> {
     return this.http.get<Patient[]>(this.baseUrl + 'clinic').toPromise();

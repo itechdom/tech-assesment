@@ -45,24 +45,6 @@ namespace justice_technical_assestment.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patient",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    PassNo = table.Column<string>(type: "TEXT", nullable: false),
-                    MobileNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Gender = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patient", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -76,25 +58,65 @@ namespace justice_technical_assestment.Migrations
                     table.PrimaryKey("PK_User", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Patient",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DoctorId = table.Column<int>(type: "INTEGER", nullable: true),
+                    KinId = table.Column<int>(type: "INTEGER", nullable: true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    PassNo = table.Column<string>(type: "TEXT", nullable: false),
+                    MobileNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Gender = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patient", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Patient_Doctor_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctor",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patient_Kin_KinId",
+                        column: x => x.KinId,
+                        principalTable: "Kin",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Patient",
-                columns: new[] { "Id", "DateOfBirth", "FirstName", "Gender", "LastName", "MobileNumber", "PassNo" },
-                values: new object[] { 1, new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Osama", 0, "Alghanmi", "0501977200", "XYZ190222" });
+                columns: new[] { "Id", "DateOfBirth", "DoctorId", "FirstName", "Gender", "KinId", "LastName", "MobileNumber", "PassNo" },
+                values: new object[] { 1, new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Osama", 0, null, "Alghanmi", "0501977200", "XYZ190222" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patient_DoctorId",
+                table: "Patient",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patient_KinId",
+                table: "Patient",
+                column: "KinId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Doctor");
-
-            migrationBuilder.DropTable(
-                name: "Kin");
-
-            migrationBuilder.DropTable(
                 name: "Patient");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Doctor");
+
+            migrationBuilder.DropTable(
+                name: "Kin");
         }
     }
 }

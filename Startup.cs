@@ -77,8 +77,8 @@ namespace justice_technical_assestment
             services.AddTransient<ClinicService>();
             services.AddTransient<IdentityService>();
             services.AddTransient<PatientRepository>();
-
-            //
+            services.AddTransient<KinRepository>();
+            services.AddTransient<DoctorRepository>();
         }
 
         public void Configure(IApplicationBuilder app)

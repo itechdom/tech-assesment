@@ -10,6 +10,10 @@ namespace justice_technical_assestment.Infrastructure.Services
         private readonly IHttpContextAccessor _context;
         public IdentityService _IdentityService { get; }
         public PatientRepository _PatientRepository { get; set; }
+
+        public DoctorRepository _DoctorRepository { get; set; }
+
+        public KinRepository _KinRepository { get; set; }
         public string _AppBaseUrl => $"{_context.HttpContext.Request.Scheme}://{_context.HttpContext.Request.Host}{_context.HttpContext.Request.PathBase}";
 
         public string _headerLanguage => _context.HttpContext.Request.Headers["accept-language"].ToString() ?? "ar";
@@ -19,12 +23,16 @@ namespace justice_technical_assestment.Infrastructure.Services
         public ClinicService(
             IdentityService identityService,
             PatientRepository patientRepository,
+            DoctorRepository doctorRepository,
+            KinRepository kinRepository,
             IHttpContextAccessor context,
             IConfiguration configuration
             )
         {
             _IdentityService = identityService;
             _PatientRepository = patientRepository;
+            _KinRepository = kinRepository;
+            _DoctorRepository = doctorRepository;
             _context = context;
             _Configuration = configuration;
         }
@@ -35,6 +43,7 @@ namespace justice_technical_assestment.Infrastructure.Services
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
+            var response = new PatientResponseDto();
             var dbPatients = await _PatientRepository.Get(0, 10);
             return dbPatients;
         }

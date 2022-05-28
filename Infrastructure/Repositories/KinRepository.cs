@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace justice_technical_assestment.Infrastructure.Repositories
 {
-    public class PatientRepository
+    public class KinRepository
     {
         private readonly ClinicContext _context;
 
-        public PatientRepository(ClinicContext context)
+        public KinRepository(ClinicContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Patient>> Get(int PageNumber, int PageSize)
+        public async Task<List<Kin>> Get(int PageNumber, int PageSize)
         {
-            return await _context.Patients
-                .Include(m => m.Doctor)
-                .Include(m => m.Kin)
+            return await _context.Kins
+                .Skip(PageNumber * PageSize)
+                .Take(PageSize)
                 .ToListAsync();
         }
 
-        public async Task<Patient> GetById(long Id)
+        public async Task<Kin> GetById(long Id)
         {
-            return await _context.Patients.FirstOrDefaultAsync(i => i.Id == Id);
+            return await _context.Kins.FirstOrDefaultAsync(i => i.Id == Id);
         }
 
-        public void Add(Patient patient)
+        public void Add(Kin patient)
         {
-            _context.Patients.Add(patient);
+            _context.Kins.Add(patient);
         }
 
-        public void Update(Patient patient)
+        public void Update(Kin patient)
         {
-            _context.Patients.Update(patient);
+            _context.Kins.Update(patient);
         }
 
-        public void Remove(Patient patient)
+        public void Remove(Kin patient)
         {
-            _context.Patients.Remove(patient);
+            _context.Kins.Remove(patient);
         }
 
         public async Task<int> SaveChanges()

@@ -86,11 +86,17 @@ namespace justice_technical_assestment.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("KinId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
@@ -106,6 +112,10 @@ namespace justice_technical_assestment.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("KinId");
 
                     b.ToTable("Patient", (string)null);
 
@@ -139,6 +149,21 @@ namespace justice_technical_assestment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("justice_technical_assestment.Infrastructure.Models.Patient", b =>
+                {
+                    b.HasOne("justice_technical_assestment.Infrastructure.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("justice_technical_assestment.Infrastructure.Models.Kin", "Kin")
+                        .WithMany()
+                        .HasForeignKey("KinId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Kin");
                 });
 #pragma warning restore 612, 618
         }

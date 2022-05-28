@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 mt-4">
-      <h1 class="text-center">User List</h1>
+      <h1 class="text-center">Patient List</h1>
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
@@ -12,39 +12,105 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{ user.id }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
+          <tr *ngFor="let patient of patients">
+            <td>{{ patient.Id }}</td>
+            <td>{{ patient.FirstName }}</td>
+            <td>{{ patient.LastName }}</td>
 
             <td>
-              <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditUserForm(user)">Edit</button>
+              <button
+                type="button"
+                class="btn btn-info btn-sm mr-2"
+                (click)="showEditPatientForm(patient)"
+              >
+                Edit
+              </button>
 
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeUser(user)">Delete</button>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                (click)="removePatient(patient)"
+              >
+                Delete
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-success" (click)="showAddUserForm()">Add New User</button>
+      <button class="btn btn-success" (click)="showAddPatientForm()">
+        Add New Patient
+      </button>
 
       <div class="mt-4">
-        <form *ngIf="userForm">
-          <h2>Add New User</h2>
-          <p>First Name: <input type="text" name="firstName" [(ngModel)]="newUser.firstName" /></p>
-          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="newUser.lastName" /></p>
+        <form *ngIf="patientForm">
+          <h2>Add New Patient</h2>
           <p>
-            <button type="button" class="btn btn-primary mr-2" (click)="saveUser(newUser)">Submit</button>
-            <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancel</button>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              [(ngModel)]="newPatient.firstName"
+            />
+          </p>
+          <p>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              [(ngModel)]="newPatient.lastName"
+            />
+          </p>
+          <p>
+            <button
+              type="button"
+              class="btn btn-primary mr-2"
+              (click)="savePatient(newPatient)"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="cancelNewPatient()"
+            >
+              Cancel
+            </button>
           </p>
         </form>
 
-        <form *ngIf="editUserForm">
-          <h2>Edit User Details</h2>
-          <p>First Name: <input type="text" name="firstName" [(ngModel)]="editedUser.firstName" /></p>
-          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="editedUser.lastName" /></p>
+        <form *ngIf="editPatientForm">
+          <h2>Edit Patient Details</h2>
           <p>
-            <button type="button" class="btn btn-primary mr-2" (click)="updateUser()">Submit</button>
-            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              [(ngModel)]="editedPatient.firstName"
+            />
+          </p>
+          <p>
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              [(ngModel)]="editedPatient.lastName"
+            />
+          </p>
+          <p>
+            <button
+              type="button"
+              class="btn btn-primary mr-2"
+              (click)="updatePatient()"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="cancelEdits()"
+            >
+              Cancel
+            </button>
           </p>
         </form>
       </div>

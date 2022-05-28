@@ -1,5 +1,10 @@
 export interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
+  id: Number;
+  Username: String;
+  Password: String;
+}
+
+export interface Token {
+  Token: String;
+  RefreshToken: String;
 }

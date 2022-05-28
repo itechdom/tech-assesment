@@ -24,7 +24,7 @@ namespace justice_technical_assestment.Controllers
         }
         [HttpGet]
         [Route("")]
-        public async Task<ResponseResult<List<Patient>>> GetPatients(int? patientId) =>
+        public async Task<List<Patient>> GetPatients(int? patientId) =>
             await _ClinicService.GetPatients(patientId);
 
         [HttpPost]

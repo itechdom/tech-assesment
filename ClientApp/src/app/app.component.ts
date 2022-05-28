@@ -1,76 +1,77 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './models/user';
-import { UserService } from './services/user.service';
+import { Patient } from './models/Patient';
+import { PatientService } from './services/patient.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  patients: Patient[] = [];
+  patientForm: boolean = false;
+  isNewPatient: boolean = false;
+  newPatient: any = {};
+  editPatientForm: boolean = false;
+  editedPatient: any = {};
 
-  users: User[] = [];
-  userForm: boolean = false;
-  isNewUser: boolean = false;
-  newUser: any = {};
-  editUserForm: boolean = false;
-  editedUser: any = {};
-
-  constructor(private userService: UserService) { }
+  constructor(private patientService: PatientService) {}
 
   ngOnInit() {
-    this.users = this.getUsers();
+    this.getPatients().then((data) => {
+      console.log('data', data);
+      this.patients = data;
+    });
   }
 
-  getUsers(): User[] {
-    return this.userService.getUsersFromData();
+  async getPatients(): Promise<Patient[]> {
+    const pt = await this.patientService.getPatients();
+    return pt;
   }
 
-  showEditUserForm(user: User) {
-    if (!user) {
-      this.userForm = false;
+  showEditPatientForm(patient: Patient) {
+    if (!patient) {
+      this.patientForm = false;
       return;
     }
-    this.editUserForm = true;
-    this.editedUser = user;
+    this.editPatientForm = true;
+    this.editedPatient = patient;
   }
 
-  showAddUserForm() {
-    // resets form if edited user
-    if (this.users.length) {
-      this.newUser = {};
+  showAddPatientForm() {
+    // resets form if edited patient
+    if (this.patients.length) {
+      this.newPatient = {};
     }
-    this.userForm = true;
-    this.isNewUser = true;
-
+    this.patientForm = true;
+    this.isNewPatient = true;
   }
 
-  saveUser(user: User) {
-    if (this.isNewUser) {
-      // add a new user
-      this.userService.addUser(user);
+  savePatient(patient: Patient) {
+    if (this.isNewPatient) {
+      // add a new patient
+      this.patientService.addPatient(patient);
     }
-    this.userForm = false;
+    this.patientForm = false;
   }
 
-  updateUser() {
-    this.userService.updateUser(this.editedUser);
-    this.editUserForm = false;
-    this.editedUser = {};
+  updatePatient() {
+    this.patientService.updatePatient(this.editedPatient);
+    this.editPatientForm = false;
+    this.editedPatient = {};
   }
 
-  removeUser(user: User) {
-    this.userService.deleteUser(user);
+  removePatient(patient: Patient) {
+    this.patientService.deletePatient(patient);
   }
 
   cancelEdits() {
-    this.editedUser = {};
-    this.editUserForm = false;
+    this.editedPatient = {};
+    this.editPatientForm = false;
   }
 
-  cancelNewUser() {
-    this.newUser = {};
-    this.userForm = false;
+  cancelNewPatient() {
+    this.newPatient = {};
+    this.patientForm = false;
   }
-
 }

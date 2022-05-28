@@ -29,16 +29,14 @@ namespace justice_technical_assestment.Infrastructure.Services
             _Configuration = configuration;
         }
 
-        public async Task<ResponseResult<List<Patient>>> GetPatients(int? patientId)
+        public async Task<List<Patient>> GetPatients(int? patientId)
         {
             // var obj = new ResponseResult<List<ParcelDefinition>>();
             // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
             // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
             // return obj;
             var dbPatients = await _PatientRepository.Get(0, 10);
-            var response = new ResponseResult<List<Patient>>();
-            response.ResponseData = dbPatients;
-            return response;
+            return dbPatients;
         }
         public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto patient)
         {

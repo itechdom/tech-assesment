@@ -89,6 +89,16 @@ namespace justice_technical_assestment.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Doctor",
+                columns: new[] { "Id", "Initialis", "MobileNumber", "surname" },
+                values: new object[] { 1, "o.s.", "+966501987111", "Almali" });
+
+            migrationBuilder.InsertData(
+                table: "Kin",
+                columns: new[] { "Id", "AddressLineFour", "AddressLineOne", "AddressLineThree", "AddressLineTwo", "FirstName", "LastName", "PostalCode", "Relation" },
+                values: new object[] { 1, "Address test 4", "Address test 1", "Address test 3", "Address test two", "Mohammed", "Ali", "123321", 2 });
+
+            migrationBuilder.InsertData(
                 table: "Patient",
                 columns: new[] { "Id", "DateOfBirth", "DoctorId", "FirstName", "Gender", "KinId", "LastName", "MobileNumber", "PassNo" },
                 values: new object[] { 1, new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Osama", 0, null, "Alghanmi", "0501977200", "XYZ190222" });

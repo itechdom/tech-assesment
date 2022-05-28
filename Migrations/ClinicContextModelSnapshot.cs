@@ -38,6 +38,15 @@ namespace justice_technical_assestment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctor", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Initialis = "o.s.",
+                            MobileNumber = "+966501987111",
+                            surname = "Almali"
+                        });
                 });
 
             modelBuilder.Entity("justice_technical_assestment.Infrastructure.Models.Kin", b =>
@@ -75,6 +84,20 @@ namespace justice_technical_assestment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Kin", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressLineFour = "Address test 4",
+                            AddressLineOne = "Address test 1",
+                            AddressLineThree = "Address test 3",
+                            AddressLineTwo = "Address test two",
+                            FirstName = "Mohammed",
+                            LastName = "Ali",
+                            PostalCode = "123321",
+                            Relation = 2
+                        });
                 });
 
             modelBuilder.Entity("justice_technical_assestment.Infrastructure.Models.Patient", b =>

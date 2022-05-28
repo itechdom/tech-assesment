@@ -26,7 +26,31 @@ namespace justice_technical_assestment.Infrastructure.Data
         {
             modelBuilder.Entity<User>().ToTable("User").HasKey(p => p.Id);
             modelBuilder.Entity<Doctor>().ToTable("Doctor").HasKey(p => p.Id);
+            modelBuilder.Entity<Doctor>().ToTable("Doctor").HasData(
+                new Doctor
+                {
+                    Id = 1,
+                    Code = 428101981,
+                    Initialis = "o.s.",
+                    MobileNumber = "+966501987111",
+                    surname = "Almali"
+                }
+            );
             modelBuilder.Entity<Kin>().ToTable("Kin").HasKey(p => p.Id);
+            modelBuilder.Entity<Kin>().ToTable("Kin").HasData(
+                new Kin
+                {
+                    Id = 1,
+                    FirstName = "Mohammed",
+                    LastName = "Ali",
+                    AddressLineOne = "Address test 1",
+                    AddressLineTwo = "Address test two",
+                    AddressLineThree = "Address test 3",
+                    AddressLineFour = "Address test 4",
+                    PostalCode = "123321",
+                    Relation = Relationship.Mother
+                }
+            );
             modelBuilder.Entity<Patient>().HasKey(p => p.Id);
             modelBuilder.Entity<Patient>().ToTable("Patient").HasData(
                 new Patient

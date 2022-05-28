@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Doctor } from '../models/Doctor';
 import { Patient } from '../models/Patient';
 
 @Injectable({
@@ -14,6 +15,9 @@ export class PatientService {
   }
   getPatients(): Promise<Patient[]> {
     return this.http.get<Patient[]>(this.baseUrl + 'clinic').toPromise();
+  }
+  getDoctors():Promise<Doctor[]>{
+    return this.http.get<Doctor[]>(this.baseUrl+'clinic/doctors').toPromise();
   }
   addPatient(user: Patient) {}
   updatePatient(user: Patient) {}

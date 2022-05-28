@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
       console.log('data', data);
       this.patients = data;
     });
+    this.patientService.getDoctors().then((data) => {
+      console.log('data', data);
+    });
   }
 
   async getPatients(): Promise<Patient[]> {

@@ -27,6 +27,11 @@ namespace justice_technical_assestment.Controllers
         public async Task<List<Patient>> GetPatients(int? patientId) =>
             await _ClinicService.GetPatients(patientId);
 
+        [HttpGet]
+        [Route("doctors")]
+        public async Task<List<Doctor>> GetDoctors(int? doctorId) =>
+            await _ClinicService.GetDoctors(doctorId);
+
         [HttpPost]
         [Route("")]
         public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto model) =>

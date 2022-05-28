@@ -39,23 +39,18 @@ namespace justice_technical_assestment.Infrastructure.Services
 
         public async Task<List<Patient>> GetPatients(int? patientId)
         {
-            // var obj = new ResponseResult<List<ParcelDefinition>>();
-            // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
-            // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
-            // return obj;
-            var response = new PatientResponseDto();
             var dbPatients = await _PatientRepository.Get(0, 10);
             return dbPatients;
         }
+        public async Task<List<Doctor>> GetDoctors(int? doctorId)
+        {
+            var dbDoctors = await _DoctorRepository.Get(0, 10);
+            return dbDoctors;
+        }
         public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto patient)
         {
-            // var obj = new ResponseResult<List<ParcelDefinition>>();
-            // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
-            // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
-            // return obj;
             return new ResponseResult<Patient>() { };
         }
-
         public async Task<ResponseResult<Patient>> UpdatePatient(PatientRequestDto patient)
         {
             // var obj = new ResponseResult<List<ParcelDefinition>>();

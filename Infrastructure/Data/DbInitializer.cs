@@ -18,7 +18,7 @@ namespace justice_technical_assestment.Infrastructure.Data
 
             var students = new User[]
             {
-            new User{UserID=1,Username="test",Password="test",},
+            new User{Id=1,Username="test",Password="test",},
             };
             foreach (User s in students)
             {
@@ -28,8 +28,8 @@ namespace justice_technical_assestment.Infrastructure.Data
 
             var courses = new Patient[]
             {
-            new Patient{PatientID=1050,FirstName="Abdullah",LastName="Ali"},
-            new Patient{PatientID=4041,FirstName="Mohammed",LastName="Saleh"},
+            new Patient{UserId=1,Id=1050,FirstName="Abdullah",LastName="Ali"},
+            new Patient{UserId=1,Id=4041,FirstName="Mohammed",LastName="Saleh"},
             };
             foreach (Patient c in courses)
             {

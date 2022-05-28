@@ -7,8 +7,8 @@ namespace justice_technical_assestment.Infrastructure.Models
 {
     public class Patient
     {
-        public int PatientID;
-        public int UserID;
+        public int Id;
+        public int UserId;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return string.Join(" ", new[] { FirstName, LastName }); } }

@@ -10,6 +10,7 @@
             <th class="text-center">Last Name</th>
             <th class="text-center">Next of Kin First Name</th>
             <th class="text-center">Next of Kin Last Name</th>
+            <th class="text-center">Doctor Surname</th>
             <th class="text-center">&nbsp;</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
             <td>{{ patient.LastName }}</td>
             <td>{{ patient.Kin?.FirstName }}</td>
             <td>{{ patient.Kin?.LastName }}</td>
+            <td>{{ patient.Doctor?.Surname }}</td>
             <td>
               <button
                 type="button"
@@ -69,6 +71,14 @@
               type="text"
               name="kinlastName"
               [(ngModel)]="newPatient.Kin.LastName"
+            />
+          </p>
+          <p>
+            Doctor's Code:
+            <input
+              type="text"
+              name="doctorcode"
+              [(ngModel)]="newPatient.Doctor.Code"
             />
           </p>
           <p>

@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
     DateOfBirth: new Date(),
     Gender: GenderCode.M,
     Kin: {},
+    Doctor: {
+      Code: -1,
+    },
   };
   editPatientForm: boolean = false;
   editedPatient: any = {};
@@ -40,6 +43,9 @@ export class AppComponent implements OnInit {
       DateOfBirth: new Date(),
       Gender: GenderCode.M,
       Kin: {},
+      Doctor: {
+        Code: -1,
+      },
     };
   }
 
@@ -78,6 +84,12 @@ export class AppComponent implements OnInit {
         FirstName: patient.Kin.FirstName,
         LastName: patient.Kin.LastName,
         Relation: Relationship.Other,
+      },
+      Doctor: {
+        Code: patient.Doctor?.Code,
+        Initialis: 'a.b',
+        Surname: 'surname example',
+        MobileNumber: '0500111111',
       },
     };
     this.patientService.addPatient(newPatient).then((data) => {

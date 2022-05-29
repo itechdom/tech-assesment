@@ -1,7 +1,7 @@
 export interface Doctor {
-  Id: Number;
+  Id?: Number;
   Code: Number;
-  Surname: String;
-  Initialis: String;
-  MobileNumber: String;
+  Surname?: String;
+  Initialis?: String;
+  MobileNumber?: String;
 }

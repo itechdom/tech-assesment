@@ -85,7 +85,15 @@ namespace justice_technical_assestment.Infrastructure.Services
                 FirstName = patient.Kin?.FirstName,
                 LastName = patient.Kin?.LastName
             };
+            var newDoctor = new Doctor
+            {
+                Code = patient.Doctor.Code,
+                Initialis = patient.Doctor.Initialis,
+                Surname = patient.Doctor.Surname,
+                MobileNumber = patient.Doctor.MobileNumber
+            };
             newPatient.Kin = newKin;
+            newPatient.Doctor = newDoctor;
             _PatientRepository.Add(newPatient);
             await _PatientRepository.SaveChanges();
             return newPatient.Id;

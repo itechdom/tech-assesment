@@ -34,12 +34,12 @@ namespace justice_technical_assestment.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto model) =>
+        public async Task<long> CreatePatient(PatientRequestDto model) =>
            await _ClinicService.CreatePatient(model);
 
         [HttpPut]
         [Route("")]
-        public async Task<ResponseResult<Patient>> UpdatePatient(PatientRequestDto model) =>
+        public async Task<long> UpdatePatient(Patient model) =>
            await _ClinicService.UpdatePatient(model);
 
         [HttpDelete]

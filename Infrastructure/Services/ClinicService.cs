@@ -47,17 +47,57 @@ namespace justice_technical_assestment.Infrastructure.Services
             var dbDoctors = await _DoctorRepository.Get(0, 10);
             return dbDoctors;
         }
-        public async Task<ResponseResult<Patient>> CreatePatient(PatientRequestDto patient)
+        public async Task<List<Kin>> GetKins(int? patientId)
         {
-            return new ResponseResult<Patient>() { };
+            var dbKins = await _KinRepository.Get(0, 10);
+            return dbKins;
         }
-        public async Task<ResponseResult<Patient>> UpdatePatient(PatientRequestDto patient)
+        public async Task<long> CreateKin(KinRequestDto kin)
         {
-            // var obj = new ResponseResult<List<ParcelDefinition>>();
-            // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
-            // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
-            // return obj;
-            return new ResponseResult<Patient>() { };
+            var newKin = new Kin
+            {
+                FirstName = kin.FirstName,
+                LastName = kin.LastName,
+                AddressLineOne = kin.AddressLineOne,
+                AddressLineTwo = kin.AddressLineTwo,
+                AddressLineThree = kin.AddressLineThree,
+                AddressLineFour = kin.AddressLineFour,
+                PostalCode = kin.PostalCode,
+                Relation = kin.Relation
+            };
+            _KinRepository.Add(newKin);
+            await _KinRepository.SaveChanges();
+            return newKin.Id;
+        }
+        public async Task<long> CreatePatient(PatientRequestDto patient)
+        {
+            var newPatient = new Patient
+            {
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                MobileNumber = patient.MobileNumber,
+            };
+            var newKin = new Kin
+            {
+                FirstName = patient.Kin?.FirstName,
+                LastName = patient.Kin?.LastName
+            };
+            _KinRepository.Add(newKin);
+            var res = await _KinRepository.SaveChanges();
+            newPatient.Kin = newKin;
+            newPatient.Kin.Id = res;
+            var newDoctor = new Doctor();
+            newPatient.Doctor = newDoctor;
+            newPatient.Doctor.Id = 1;
+            _PatientRepository.Add(newPatient);
+            await _PatientRepository.SaveChanges();
+            return newPatient.Id;
+        }
+        public async Task<long> UpdatePatient(Patient patient)
+        {
+            _PatientRepository.Update(patient);
+            await _PatientRepository.SaveChanges();
+            return patient.Id;
         }
         public async Task<ResponseResult<List<Patient>>> DeletePatient(int patientId)
         {

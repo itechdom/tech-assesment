@@ -33,7 +33,7 @@ namespace justice_technical_assestment.Infrastructure.Data
                     Code = 428101981,
                     Initialis = "o.s.",
                     MobileNumber = "+966501987111",
-                    surname = "Almali"
+                    Surname = "Almali"
                 }
             );
             modelBuilder.Entity<Kin>().ToTable("Kin").HasKey(p => p.Id);

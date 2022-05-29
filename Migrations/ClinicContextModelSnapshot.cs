@@ -31,7 +31,7 @@ namespace justice_technical_assestment.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("surname")
+                    b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -45,7 +45,7 @@ namespace justice_technical_assestment.Migrations
                             Id = 1,
                             Initialis = "o.s.",
                             MobileNumber = "+966501987111",
-                            surname = "Almali"
+                            Surname = "Almali"
                         });
                 });
 

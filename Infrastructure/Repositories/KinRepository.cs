@@ -30,19 +30,19 @@ namespace justice_technical_assestment.Infrastructure.Repositories
             return await _context.Kins.FirstOrDefaultAsync(i => i.Id == Id);
         }
 
-        public void Add(Kin patient)
+        public void Add(Kin kin)
         {
-            _context.Kins.Add(patient);
+           _context.Kins.Add(kin);
         }
 
-        public void Update(Kin patient)
+        public void Update(Kin kin)
         {
-            _context.Kins.Update(patient);
+            _context.Kins.Update(kin);
         }
 
-        public void Remove(Kin patient)
+        public void Remove(Kin kin)
         {
-            _context.Kins.Remove(patient);
+            _context.Kins.Remove(kin);
         }
 
         public async Task<int> SaveChanges()

@@ -15,7 +15,7 @@ namespace justice_technical_assestment.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    surname = table.Column<string>(type: "TEXT", nullable: false),
+                    Surname = table.Column<string>(type: "TEXT", nullable: false),
                     Initialis = table.Column<string>(type: "TEXT", nullable: false),
                     MobileNumber = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -90,7 +90,7 @@ namespace justice_technical_assestment.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctor",
-                columns: new[] { "Id", "Initialis", "MobileNumber", "surname" },
+                columns: new[] { "Id", "Initialis", "MobileNumber", "Surname" },
                 values: new object[] { 1, "o.s.", "+966501987111", "Almali" });
 
             migrationBuilder.InsertData(

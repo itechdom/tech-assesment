@@ -9,12 +9,12 @@ export enum Relationship {
 }
 export interface Kin {
   Id: Number;
-  FirstName: String;
-  LastName: String;
-  FullName: String;
-  AddressLineOne: String;
-  AddressLineTwo: String;
-  AddressLineThree: String;
-  AddressLineFour: String;
-  Relation: Relationship;
+  FirstName?: String;
+  LastName?: String;
+  FullName?: String;
+  AddressLineOne?: String;
+  AddressLineTwo?: String;
+  AddressLineThree?: String;
+  AddressLineFour?: String;
+  Relation?: Relationship;
 }

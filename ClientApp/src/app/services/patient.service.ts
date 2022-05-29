@@ -16,10 +16,12 @@ export class PatientService {
   getPatients(): Promise<Patient[]> {
     return this.http.get<Patient[]>(this.baseUrl + 'clinic').toPromise();
   }
-  getDoctors():Promise<Doctor[]>{
-    return this.http.get<Doctor[]>(this.baseUrl+'clinic/doctors').toPromise();
+  getDoctors(): Promise<Doctor[]> {
+    return this.http.get<Doctor[]>(this.baseUrl + 'clinic/doctors').toPromise();
   }
-  addPatient(user: Patient) {}
-  updatePatient(user: Patient) {}
-  deletePatient(user: Patient) {}
+  addPatient(patient: Patient): Promise<Number> {
+    return this.http.post<Number>(this.baseUrl + 'clinic', patient).toPromise();
+  }
+  updatePatient(patient: Patient) {}
+  deletePatient(patient: Patient) {}
 }

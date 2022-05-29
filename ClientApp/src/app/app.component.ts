@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from './models/Patient';
+import { Relationship } from './models/Kin';
+import { GenderCode, Patient } from './models/Patient';
 import { PatientService } from './services/patient.service';
 
 @Component({
@@ -19,12 +20,23 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getPatients().then((data) => {
-      console.log('data', data);
       this.patients = data;
     });
     this.patientService.getDoctors().then((data) => {
       console.log('data', data);
     });
+    this.patientService.addPatient({
+      FirstName: "test",
+      LastName: "test2",
+      DateOfBirth: new Date(),
+      Gender: GenderCode.M,
+      Kin:{
+        Id: 0,
+        FirstName: "Kin test 1",
+        LastName: "Kin test 2",
+        Relation: Relationship.Other,
+      }
+    })
   }
 
   async getPatients(): Promise<Patient[]> {

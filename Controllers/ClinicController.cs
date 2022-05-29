@@ -44,8 +44,8 @@ namespace justice_technical_assestment.Controllers
 
         [HttpDelete]
         [Route("")]
-        public async Task<ResponseResult<List<Patient>>> DeletePatient(int patientId) =>
-            await _ClinicService.DeletePatient(patientId);
+        public async Task<long> DeletePatient(int Id) =>
+            await _ClinicService.DeletePatient(Id);
 
     }
 }

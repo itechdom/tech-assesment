@@ -76,19 +76,16 @@ namespace justice_technical_assestment.Infrastructure.Services
                 FirstName = patient.FirstName,
                 LastName = patient.LastName,
                 MobileNumber = patient.MobileNumber,
+                PassNo = "Test",
+                DateOfBirth = new DateTime(),
+                Gender = GenderCode.M
             };
             var newKin = new Kin
             {
                 FirstName = patient.Kin?.FirstName,
                 LastName = patient.Kin?.LastName
             };
-            _KinRepository.Add(newKin);
-            var res = await _KinRepository.SaveChanges();
             newPatient.Kin = newKin;
-            newPatient.Kin.Id = res;
-            var newDoctor = new Doctor();
-            newPatient.Doctor = newDoctor;
-            newPatient.Doctor.Id = 1;
             _PatientRepository.Add(newPatient);
             await _PatientRepository.SaveChanges();
             return newPatient.Id;
@@ -99,19 +96,12 @@ namespace justice_technical_assestment.Infrastructure.Services
             await _PatientRepository.SaveChanges();
             return patient.Id;
         }
-        public async Task<ResponseResult<List<Patient>>> DeletePatient(int patientId)
+        public async Task<long> DeletePatient(int patientId)
         {
-            // var obj = new ResponseResult<List<ParcelDefinition>>();
-            // var mobileNo = _IdentityService.BasicCustomerInfo.MobileNumber;
-            // obj.ResponseData = await _PackageDefinitionProxyService.GetParcelDefinitionByMobileNO(mobileNo);
-            // return obj;
-            return new ResponseResult<List<Patient>>() { };
-        }
-
-        internal async Task<bool> isValidPatient(int patientId)
-        {
-            //takes the id of the doctor and returns whether this patient belongs to him
-            return true;
+            var patient = await _PatientRepository.GetById(patientId);
+            _PatientRepository.Remove(patient);
+            await _PatientRepository.SaveChanges();
+            return patient.Id;
         }
     }
 }

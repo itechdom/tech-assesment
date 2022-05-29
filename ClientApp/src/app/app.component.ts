@@ -12,7 +12,13 @@ export class AppComponent implements OnInit {
   patients: Patient[] = [];
   patientForm: boolean = false;
   isNewPatient: boolean = false;
-  newPatient: any = {};
+  newPatient: Patient = {
+    FirstName: '',
+    LastName: '',
+    DateOfBirth: new Date(),
+    Gender: GenderCode.M,
+    Kin: {},
+  };
   editPatientForm: boolean = false;
   editedPatient: any = {};
 
@@ -23,20 +29,18 @@ export class AppComponent implements OnInit {
       this.patients = data;
     });
     this.patientService.getDoctors().then((data) => {
-      console.log('data', data);
+      console.log('Doctors', data);
     });
-    this.patientService.addPatient({
-      FirstName: "test",
-      LastName: "test2",
+  }
+
+  getEmptyPatient(): Patient {
+    return {
+      FirstName: '',
+      LastName: '',
       DateOfBirth: new Date(),
       Gender: GenderCode.M,
-      Kin:{
-        Id: 0,
-        FirstName: "Kin test 1",
-        LastName: "Kin test 2",
-        Relation: Relationship.Other,
-      }
-    })
+      Kin: {},
+    };
   }
 
   async getPatients(): Promise<Patient[]> {
@@ -56,28 +60,43 @@ export class AppComponent implements OnInit {
   showAddPatientForm() {
     // resets form if edited patient
     if (this.patients.length) {
-      this.newPatient = {};
+      this.newPatient = this.getEmptyPatient();
     }
     this.patientForm = true;
     this.isNewPatient = true;
   }
 
   savePatient(patient: Patient) {
-    if (this.isNewPatient) {
-      // add a new patient
-      this.patientService.addPatient(patient);
-    }
+    console.log('NEW', patient);
+    let newPatient: Patient = {
+      FirstName: patient.FirstName,
+      LastName: patient.LastName,
+      DateOfBirth: new Date(),
+      MobileNumber: '05019777777',
+      Gender: GenderCode.M,
+      Kin: {
+        FirstName: patient.Kin.FirstName,
+        LastName: patient.Kin.LastName,
+        Relation: Relationship.Other,
+      },
+    };
+    this.patientService.addPatient(newPatient).then((data) => {
+      console.log('DATA', data);
+      newPatient.Id = data as number;
+      this.patients.push(newPatient);
+    });
     this.patientForm = false;
   }
 
   updatePatient() {
-    this.patientService.updatePatient(this.editedPatient);
     this.editPatientForm = false;
     this.editedPatient = {};
   }
 
   removePatient(patient: Patient) {
-    this.patientService.deletePatient(patient);
+    this.patientService.deletePatient(patient).then((data) => {
+      this.patients = this.patients.filter((p) => p.Id != patient.Id);
+    });
   }
 
   cancelEdits() {
@@ -86,7 +105,7 @@ export class AppComponent implements OnInit {
   }
 
   cancelNewPatient() {
-    this.newPatient = {};
+    this.newPatient = this.getEmptyPatient();
     this.patientForm = false;
   }
 }

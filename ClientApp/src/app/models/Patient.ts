@@ -2,7 +2,7 @@
 import { Kin } from './Kin';
 
 export interface Patient {
-  Id?: Number;
+  Id?: number;
   Kin: Kin;
   Doctor?: Doctor;
   FirstName: String;

@@ -8,7 +8,7 @@ export enum Relationship {
   Other,
 }
 export interface Kin {
-  Id: Number;
+  Id?: Number;
   FirstName?: String;
   LastName?: String;
   FullName?: String;

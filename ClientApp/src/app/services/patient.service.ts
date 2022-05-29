@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Doctor } from '../models/Doctor';
 import { Patient } from '../models/Patient';
@@ -22,6 +22,15 @@ export class PatientService {
   addPatient(patient: Patient): Promise<Number> {
     return this.http.post<Number>(this.baseUrl + 'clinic', patient).toPromise();
   }
-  updatePatient(patient: Patient) {}
-  deletePatient(patient: Patient) {}
+  deletePatient(patient: Patient) {
+    if (patient.Id) {
+      let params = new HttpParams().set('Id', patient.Id);
+      return this.http
+        .delete<Number>(this.baseUrl + 'clinic', { params })
+        .toPromise();
+    }
+    return new Promise((resolve, reject) => {
+      reject('Patient ID is required');
+    });
+  }
 }

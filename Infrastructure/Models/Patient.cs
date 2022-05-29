@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace justice_technical_assestment.Infrastructure.Models
 {
@@ -9,6 +10,7 @@ namespace justice_technical_assestment.Infrastructure.Models
     {
         public int Id;
         public Doctor? Doctor { get; set; }
+        // public int? Doctor_Id { get; set; }
         public Kin? Kin { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

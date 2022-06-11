@@ -13,7 +13,7 @@ namespace justice_technical_assestment.Migrations
                 name: "Doctor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    DoctorId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Surname = table.Column<string>(type: "TEXT", nullable: false),
                     Initialis = table.Column<string>(type: "TEXT", nullable: false),
@@ -21,7 +21,7 @@ namespace justice_technical_assestment.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctor", x => x.Id);
+                    table.PrimaryKey("PK_Doctor", x => x.DoctorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,7 +64,7 @@ namespace justice_technical_assestment.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DoctorId = table.Column<int>(type: "INTEGER", nullable: true),
+                    DoctorId = table.Column<int>(type: "INTEGER", nullable: false),
                     KinId = table.Column<int>(type: "INTEGER", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
@@ -80,7 +80,8 @@ namespace justice_technical_assestment.Migrations
                         name: "FK_Patient_Doctor_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctor",
-                        principalColumn: "Id");
+                        principalColumn: "DoctorId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Patient_Kin_KinId",
                         column: x => x.KinId,
@@ -90,7 +91,7 @@ namespace justice_technical_assestment.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctor",
-                columns: new[] { "Id", "Initialis", "MobileNumber", "Surname" },
+                columns: new[] { "DoctorId", "Initialis", "MobileNumber", "Surname" },
                 values: new object[] { 1, "o.s.", "+966501987111", "Almali" });
 
             migrationBuilder.InsertData(
@@ -101,7 +102,7 @@ namespace justice_technical_assestment.Migrations
             migrationBuilder.InsertData(
                 table: "Patient",
                 columns: new[] { "Id", "DateOfBirth", "DoctorId", "FirstName", "Gender", "KinId", "LastName", "MobileNumber", "PassNo" },
-                values: new object[] { 1, new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Osama", 0, null, "Alghanmi", "0501977200", "XYZ190222" });
+                values: new object[] { 1, new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Osama", 0, null, "Alghanmi", "0501977200", "XYZ190222" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patient_DoctorId",

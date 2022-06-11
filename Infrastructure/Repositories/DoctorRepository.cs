@@ -27,7 +27,7 @@ namespace justice_technical_assestment.Infrastructure.Repositories
 
         public async Task<Doctor> GetById(long Id)
         {
-            return await _context.Doctors.FirstOrDefaultAsync(i => i.Id == Id);
+            return await _context.Doctors.FirstOrDefaultAsync(i => i.DoctorId == Id);
         }
 
         public void Add(Doctor patient)

@@ -25,11 +25,11 @@ namespace justice_technical_assestment.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User").HasKey(p => p.Id);
-            modelBuilder.Entity<Doctor>().ToTable("Doctor").HasKey(p => p.Id);
+            modelBuilder.Entity<Doctor>().ToTable("Doctor").HasKey(p => p.DoctorId);
             modelBuilder.Entity<Doctor>().ToTable("Doctor").HasData(
                 new Doctor
                 {
-                    Id = 1,
+                    DoctorId = 1,
                     Code = 428101981,
                     Initialis = "o.s.",
                     MobileNumber = "+966501987111",
@@ -56,6 +56,7 @@ namespace justice_technical_assestment.Infrastructure.Data
                 new Patient
                 {
                     Id = 1,
+                    DoctorId = 1,
                     FirstName = "Osama",
                     LastName = "Alghanmi",
                     DateOfBirth = new DateTime(1989, 11, 11),

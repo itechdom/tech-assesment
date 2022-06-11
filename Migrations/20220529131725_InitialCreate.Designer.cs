@@ -11,7 +11,7 @@ using justice_technical_assestment.Infrastructure.Data;
 namespace justice_technical_assestment.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    [Migration("20220528051312_InitialCreate")]
+    [Migration("20220529131725_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace justice_technical_assestment.Migrations
 
             modelBuilder.Entity("justice_technical_assestment.Infrastructure.Models.Doctor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DoctorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -37,14 +37,14 @@ namespace justice_technical_assestment.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("DoctorId");
 
                     b.ToTable("Doctor", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            DoctorId = 1,
                             Initialis = "o.s.",
                             MobileNumber = "+966501987111",
                             Surname = "Almali"
@@ -111,7 +111,7 @@ namespace justice_technical_assestment.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DoctorId")
+                    b.Property<int>("DoctorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
@@ -149,6 +149,7 @@ namespace justice_technical_assestment.Migrations
                         {
                             Id = 1,
                             DateOfBirth = new DateTime(1989, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
                             FirstName = "Osama",
                             Gender = 0,
                             LastName = "Alghanmi",
@@ -180,7 +181,9 @@ namespace justice_technical_assestment.Migrations
                 {
                     b.HasOne("justice_technical_assestment.Infrastructure.Models.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("DoctorId");
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("justice_technical_assestment.Infrastructure.Models.Kin", "Kin")
                         .WithMany()

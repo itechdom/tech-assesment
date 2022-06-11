@@ -10,7 +10,7 @@ namespace justice_technical_assestment.Infrastructure.Models
     {
         public int Id;
         public Doctor? Doctor { get; set; }
-        // public int? Doctor_Id { get; set; }
+        public int DoctorId { get; set; }
         public Kin? Kin { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
